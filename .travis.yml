@@ -1,4 +1,4 @@
-language: pythnon
+language: python
 notifications:
   webhooks:
     - https://ec2-18-216-98-165.us-east-2.compute.amazonaws.com:8009/hook/flask-app-pushed
