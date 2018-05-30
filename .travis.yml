@@ -1,7 +1,7 @@
 language: python
 notifications:
   webhooks:
-    - https://kajiggabin.herokuapp.com/s3zbqcs4/hook/flask-app-pushed
+    - https://salt.kajigga.com/hook/flask-app-pushed
   on_success: always # default: always
   on_failure: always # default: always
   on_start: always   # default: never
