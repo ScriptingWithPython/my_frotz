@@ -1,0 +1,100 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://getbootstrap.com/favicon.ico">
+
+    <title>IF Prepping</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/sticky-footer.css" rel="stylesheet">
+    <style>
+      .command-label { display: none }
+    </style>
+  </head>
+
+  <body>
+    <div id="game_app">
+      <!-- Begin page content -->
+      {% raw %}
+      <main role="main" class="container" >
+        <h1 class="mt-5">{{ game_name }}</h1>
+        <p class="lead">{{ location }}</p>
+        <pre>{{ current_text }}</pre>
+      </main>
+      {% endraw %}
+
+      <footer class="footer">
+        <div class="container">
+          <span class="text-muted">
+          <!-- Game input here --> 
+            <form id='game_input'
+              v-on:submit="collect_command" 
+              class='form'>
+              <div class="form-group">
+                <label class='command-label' for="exampleInputEmail1">command</label>
+                <input type="textbox" class="form-control" 
+                  v-model="my_command"
+                  aria-describedby="commandHelp" 
+                  placeholder="Enter Command">
+              </div>
+            </form>
+          </span>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <!-- development version, includes helpful console warnings -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+  <script type='text/javascript'>
+    var app = new Vue({
+      el: '#game_app',
+      data: {
+        game_name: 'Cochon Perdu',
+        score: 0,
+        location: null,
+        current_text:'',
+        my_command:''
+      },
+      created: function () {
+        // `this` points to the vm instance
+        var vm = this;
+        axios.put('/restart')
+            .then(function (response) {
+              vm.current_text = response.data.text;
+              vm.location = response.data.location;
+              // vm.location = response.data.location;
+            })
+            .catch(function (error) {
+              vm.answer = 'Error! Could not reach the API. ' + error
+            })
+      },
+      methods: {
+        collect_command: function(e){
+          e.preventDefault();
+          var data = {'command': this.my_command};
+          this.current_text = '...';
+          this.my_command = '';
+          var vm = this;
+          axios.post('/send', data)
+            .then(function (response) {
+              vm.current_text = response.data.text;
+              vm.location = response.data.location;
+              // vm.location = response.data.location;
+            })
+            .catch(function (error) {
+              vm.answer = 'Error! Could not reach the API. ' + error
+            })
+        }
+      }
+    })
+  </script>
+</html>

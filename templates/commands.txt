@@ -1,0 +1,11 @@
+{%- if restore %}restore
+{{ save_filename }}
+{% endif -%}
+{%- if command %}{{command}}
+{% endif -%}
+save
+{{ save_filename }}
+{% if overwrite -%}
+y
+{% endif -%}
+
