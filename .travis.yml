@@ -2,3 +2,8 @@ language: python
 notifications:
   webhooks:
     - https://ec2-18-216-98-165.us-east-2.compute.amazonaws.com:8009/hook/flask-app-pushed
+  on_success: always # default: always
+  on_failure: always # default: always
+  on_start: always   # default: never
+  on_cancel: always # default: always
+  on_error: always # default: always
