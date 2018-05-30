@@ -29,24 +29,24 @@ def test_home(client):
     assert 200 == rv.status_code
 
 
-def test_restart_api(client):
-    res = client.put('/restart')
-    assert 200 == res.status_code
-    print(res.data)
+# def test_restart_api(client):
+#     res = client.put('/restart')
+#     assert 200 == res.status_code
+#     print(res.data)
 
 
-def test_pig_in_data_api(client):
-    res = client.put('/restart')
-    assert b'Pig' in res.data
+# def test_pig_in_data_api(client):
+#     res = client.put('/restart')
+#     assert b'Pig' in res.data
 
 
-def test_location_in_data_api(client):
-    res = client.put('/restart')
-    json_data = json.loads(res.data)
-    assert 'location' in json_data
+# def test_location_in_data_api(client):
+#     res = client.put('/restart')
+#     json_data = json.loads(res.data)
+#     assert 'location' in json_data
 
 
-def test_text_in_data_api(client):
-    res = client.put('/restart')
-    json_data = json.loads(res.data)
-    assert 'text' in json_data
+# def test_text_in_data_api(client):
+#     res = client.put('/restart')
+#     json_data = json.loads(res.data)
+#     assert 'text' in json_data
