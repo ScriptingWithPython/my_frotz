@@ -3,6 +3,10 @@ python:
   - "2.7"
   - "3.5"
   - "3.6"
+before_install:
+  - git clone https://github.com/DavidGriffith/frotz.git
+  - cd frotz
+  - sudo make dfrotz
 notifications:
   webhooks:
     - https://salt.kajigga.com/api/hook/flask-app-pushed
@@ -13,7 +17,3 @@ notifications:
   on_error: always # default: always
 script:
   - pytest 
-before_install:
-  - git clone https://github.com/DavidGriffith/frotz.git
-  - cd frotz
-  - sudo make dfrotz
