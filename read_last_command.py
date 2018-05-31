@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-#from io import StringIO
-#import sys
+# from io import StringIO
+# import sys
 import os
 import re
 import subprocess
@@ -8,15 +8,18 @@ from jinja2 import Environment, FileSystemLoader
 import logging
 
 from flask.logging import default_handler
+BASE = os.path.dirname(os.path.abspath(__file__))
+
 log = logging.getLogger()
 log.addHandler(default_handler)
 
-save_filename='saves/mysave2.qzl'
+save_filename = os.path.join(BASE, 'saves', 'mysave2.qzl')
 
 env = Environment(
     loader=FileSystemLoader('./')
 )
 template = env.get_template('templates/commands.txt')
+
 
 def restart_game():
   # Delete any saved game files, etc
@@ -27,6 +30,7 @@ def restart_game():
 
 top_line_pat = re.compile('^(?P<location>.+?) {3,}(?P<right_side>.*)$')
 score_pat = re.compile('^Score: (?P<score>\d*)')
+
 
 def parse_output(output, overwritten=True):
   back_pedal = -3
@@ -56,6 +60,7 @@ def parse_output(output, overwritten=True):
       text = '\r\n'.join(lines[1:]),
       score=score)
   return data
+
 
 def send_command(command, restore=True):
 
