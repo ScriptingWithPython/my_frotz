@@ -13,3 +13,6 @@ notifications:
   on_error: always # default: always
 script:
   - pytest 
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y dfrotz
