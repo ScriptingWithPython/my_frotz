@@ -29,10 +29,10 @@ def test_home(client):
     assert 200 == rv.status_code
 
 
-# def test_restart_api(client):
-#     res = client.put('/restart')
-#     assert 200 == res.status_code
-#     print(res.data)
+def test_restart_api(client):
+    res = client.put('/restart')
+    assert 200 == res.status_code
+    print(res.data)
 
 
 # def test_pig_in_data_api(client):
