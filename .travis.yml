@@ -5,7 +5,7 @@ python:
   - "3.6"
 notifications:
   webhooks:
-    - https://salt.kajigga.com/hook/flask-app-pushed
+    - https://salt.kajigga.com/api/hook/flask-app-pushed
   on_success: always # default: always
   on_failure: always # default: always
   on_start: always   # default: never
